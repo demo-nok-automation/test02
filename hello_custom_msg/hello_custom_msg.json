@@ -59,7 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"message\": \"Hello, I forgot!\"\n}"
+					"raw": "{\n\t\"message\": {{a_msg}}\n}"
 				},
 				"url": "https://postman-echo.com/post"
 			},
