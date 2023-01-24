@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "f8ce4327-d163-4bfc-9495-d5920bfcc8ad",
+		"name": "Hello World with custom message",
+		"description": "A simple collection with one request that has tests to validate response. You can use this collection as a entry-levle example to demonstrate Postman's debugging capabilities.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello World",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200. updates github? - Another test\", function () {",
+							"    pm.response.to.be.success;",
+							"});",
+							"",
+							"pm.test(\"Ensure `data` property exists and contains `message`\", function () {",
+							"    pm.response.to.have.jsonSchema({",
+							"        properties: {",
+							"            data: {",
+							"                type: \"object\",",
+							"                properties: {",
+							"                    message: {",
+							"                        type: \"string\"",
+							"                    }",
+							"                }",
+							"            }",
+							"        }",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Ensure valid message\", function () {",
+							"    pm.expect(jsonData.data.message).to.eql('Hello, World!');",
+							"})"
+						],
+						"type": "text/javascript",
+						"id": "eb0bf933-76b0-48f8-8067-c6b371e4ab83"
+					}
+				}
+			],
+			"_postman_id": "77738ffa-799b-4855-a776-2080c45609b4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"message\": \"Hello, World!\"\n}",
+					"options": {}
+				},
+				"url": "https://postman-echo.com/post"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "dc0a6905-ce82-46fa-bd39-2ba977d6e639"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "788142ae-bda1-47d8-a0bb-24437e5a76ef"
+			}
+		}
+	]
+}
