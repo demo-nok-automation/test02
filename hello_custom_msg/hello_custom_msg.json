@@ -59,7 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"message\": {{custom_msg}}\n}"
+					"raw": "{\n\t\"message\": {{message}}\n}"
 				},
 				"url": "https://postman-echo.com/post"
 			},
