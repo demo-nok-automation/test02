@@ -12,6 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "eb0bf933-76b0-48f8-8067-c6b371e4ab83",
 						"exec": [
 							"const jsonData = pm.response.json();",
 							"",
@@ -38,12 +39,11 @@
 							"    pm.expect(jsonData.data.message).to.eql('Hello, World!');",
 							"})"
 						],
-						"type": "text/javascript",
-						"id": "eb0bf933-76b0-48f8-8067-c6b371e4ab83"
+						"type": "text/javascript"
 					}
 				}
 			],
-			"_postman_id": "77738ffa-799b-4855-a776-2080c45609b4",
+			"id": "77738ffa-799b-4855-a776-2080c45609b4",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -59,8 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"message\": \"Hello, World!\"\n}",
-					"options": {}
+					"raw": "{\n\t\"message\": {{custom_msg}}\n}"
 				},
 				"url": "https://postman-echo.com/post"
 			},
