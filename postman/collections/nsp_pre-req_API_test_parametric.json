@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "dcd3e3b3-72c5-4380-99d1-eb5fe824ec31",
+		"name": "nsp_pre-req_API_test_parametric",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET the data store",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8a0ccbb2-bf37-4a2d-891b-672fbfabb1bc",
+						"exec": [
+							"const auth = pm.environment.get(\"token_url\");",
+							"const user = btoa(`${pm.environment.get('username')}:${pm.environment.get('password')}`);",
+							"const echoPostRequest = {",
+							"    url: auth,",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Content-Type': 'application/json',",
+							"        'Authorization': 'Basic ' + user",
+							"    },",
+							"    body: { ",
+							"          mode: 'raw',",
+							"          raw: JSON.stringify({\"grant_type\": \"client_credentials\"})   ",
+							"    }",
+							"};",
+							"pm.sendRequest(echoPostRequest, function (err, res) {    ",
+							"    pm.environment.set(\"Access_Token\", res.json().access_token);",
+							"    pm.environment.set(\"Refresh_Token\", res.json().refresh_token);",
+							"    console.log(err ? error : res.json())",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee043c02-f61b-4a46-a80e-7125854942ae",
+						"exec": [
+							"console.log(JSON.parse(responseBody));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "ea3ff123-22ee-41ca-841f-2d3909318d86",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Access_Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/yang-data+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{server}}:8545/restconf",
+					"protocol": "https",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8545",
+					"path": [
+						"restconf"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"type": "text",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET the schema mounts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c2f89062-f25a-4e8b-ae7d-e5f4186235aa",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a4c58654-42ee-416a-80ba-40815cf056dc",
+						"exec": [
+							"console.log(JSON.parse(responseBody));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "74f5b589-c316-46e1-96d9-4df631bea54f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Access_Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/yang-data+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{server}}:{{port}}/restconf/data/ietf-yang-schema-mount:schema-mounts",
+					"protocol": "https",
+					"host": [
+						"{{server}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"restconf",
+						"data",
+						"ietf-yang-schema-mount:schema-mounts"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"type": "text",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get EPIPE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c5e1ed1-9db8-4bdd-a4be-1c1dcb7ec03f",
+						"exec": [
+							"console.log(JSON.parse(responseBody));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "1b0f5a04-d3c6-438d-a41a-aa17740b4f0f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Access_Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"url": "https://{{server}}:8545/restconf/data/nsp-service-intent:intent-base/intent={{a_intent}},{{a_intent_type}}"
+			},
+			"response": [
+				{
+					"id": "9708be08-71af-4c15-af27-5f9596c09556",
+					"name": "Get EPIPE Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": ""
+							}
+						],
+						"url": "https://{{server}}:8545/restconf/data/nsp-service-intent:intent-base/intent=EpipeWithoutSDP,epipe"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 18 Jan 2023 12:10:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' https://159-23-222-205.kubernetes.default.svc.cluster.local:* https://159.23.222.205:* https://10.233.8.108:* https://10.233.38.44:* https://10.233.18.108:* https://10.233.15.61:* https://10.233.26.15:* https://nsp-infra-config-server-app-service.default.svc.cluster.local:* https://10.233.24.121:* https://10.233.53.122:* https://10.233.59.168:* https://10.233.6.68:* https://159-23-222-205.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.10.137:* https://10.233.56.88:* https://10.233.5.72:* https://159-23-222-206.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.30.163:* https://10.233.21.74:* https://10.233.33.221:* https://10.233.60.166:* https://10.233.2.102:* https://10.233.52.149:* https://10.233.15.72:* https://10.233.31.171:* https://159.23.222.206:* https://159-23-222-206.kubernetes.default.svc.cluster.local:* https://10.233.20.37:* https://indicator-app-svc.default.svc.cluster.local:* https://10.233.48.145:* https://10.233.41.228:* https://10.233.28.235:* https://10.233.51.77:* https://lsom-server-service.default.svc.cluster.local:* https://10.233.35.252:* https://10.233.37.228:* https://10.233.8.53:* https://10.233.46.132:* https://10.233.59.44:* https://10.233.41.218:* https://10.233.35.8:* https://10.233.11.215:* https://10.233.40.242:* https://10.233.33.32:* https://10.233.4.102:* https://10.233.41.150:* https://10.233.26.138:* https://10.233.31.174:* https://10.233.32.67:* https://10.233.26.170:* https://10.233.0.208:*; connect-src 'self' wss://10.233.48.145:* wss://10.233.60.166:* wss://10.233.41.150:* wss://10.233.31.171:* wss://10.233.32.67:* wss://10.233.26.170:* wss://10.233.26.15:* wss://10.233.46.132:* wss://159.23.222.205:* wss://10.233.26.138:* wss://10.233.33.221:* wss://10.233.30.163:* wss://10.233.11.215:* wss://10.233.41.218:* wss://10.233.2.102:* wss://10.233.21.74:* wss://159-23-222-206.nspos-prometheus-nodeexporter.default.svc.cluster.local:* wss://10.233.37.228:* wss://10.233.56.88:* wss://10.233.8.108:* wss://lsom-server-service.default.svc.cluster.local:* wss://10.233.28.235:* wss://10.233.15.61:* wss://10.233.18.108:* wss://10.233.51.77:* wss://159-23-222-205.nspos-prometheus-nodeexporter.default.svc.cluster.local:* wss://159-23-222-205.kubernetes.default.svc.cluster.local:* wss://10.233.10.137:* wss://10.233.24.121:* wss://10.233.59.44:* wss://10.233.31.174:* wss://10.233.20.37:* wss://10.233.0.208:* wss://10.233.52.149:* wss://10.233.4.102:* wss://10.233.40.242:* wss://indicator-app-svc.default.svc.cluster.local:* wss://159.23.222.206:* wss://10.233.15.72:* wss://nsp-infra-config-server-app-service.default.svc.cluster.local:* wss://10.233.33.32:* wss://10.233.53.122:* wss://10.233.35.8:* wss://10.233.38.44:* wss://10.233.41.228:* wss://10.233.35.252:* wss://10.233.8.53:* wss://10.233.5.72:* wss://10.233.59.168:* wss://159-23-222-206.kubernetes.default.svc.cluster.local:* wss://10.233.6.68:* https://159-23-222-205.kubernetes.default.svc.cluster.local:* https://159.23.222.205:* https://10.233.8.108:* https://10.233.38.44:* https://10.233.18.108:* https://10.233.15.61:* https://10.233.26.15:* https://nsp-infra-config-server-app-service.default.svc.cluster.local:* https://10.233.24.121:* https://10.233.53.122:* https://10.233.59.168:* https://10.233.6.68:* https://159-23-222-205.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.10.137:* https://10.233.56.88:* https://10.233.5.72:* https://159-23-222-206.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.30.163:* https://10.233.21.74:* https://10.233.33.221:* https://10.233.60.166:* https://10.233.2.102:* https://10.233.52.149:* https://10.233.15.72:* https://10.233.31.171:* https://159.23.222.206:* https://159-23-222-206.kubernetes.default.svc.cluster.local:* https://10.233.20.37:* https://indicator-app-svc.default.svc.cluster.local:* https://10.233.48.145:* https://10.233.41.228:* https://10.233.28.235:* https://10.233.51.77:* https://lsom-server-service.default.svc.cluster.local:* https://10.233.35.252:* https://10.233.37.228:* https://10.233.8.53:* https://10.233.46.132:* https://10.233.59.44:* https://10.233.41.218:* https://10.233.35.8:* https://10.233.11.215:* https://10.233.40.242:* https://10.233.33.32:* https://10.233.4.102:* https://10.233.41.150:* https://10.233.26.138:* https://10.233.31.174:* https://10.233.32.67:* https://10.233.26.170:* https://10.233.0.208:*; default-src 'self' data: https://159-23-222-205.kubernetes.default.svc.cluster.local:* https://159.23.222.205:* https://10.233.8.108:* https://10.233.38.44:* https://10.233.18.108:* https://10.233.15.61:* https://10.233.26.15:* https://nsp-infra-config-server-app-service.default.svc.cluster.local:* https://10.233.24.121:* https://10.233.53.122:* https://10.233.59.168:* https://10.233.6.68:* https://159-23-222-205.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.10.137:* https://10.233.56.88:* https://10.233.5.72:* https://159-23-222-206.nspos-prometheus-nodeexporter.default.svc.cluster.local:* https://10.233.30.163:* https://10.233.21.74:* https://10.233.33.221:* https://10.233.60.166:* https://10.233.2.102:* https://10.233.52.149:* https://10.233.15.72:* https://10.233.31.171:* https://159.23.222.206:* https://159-23-222-206.kubernetes.default.svc.cluster.local:* https://10.233.20.37:* https://indicator-app-svc.default.svc.cluster.local:* https://10.233.48.145:* https://10.233.41.228:* https://10.233.28.235:* https://10.233.51.77:* https://lsom-server-service.default.svc.cluster.local:* https://10.233.35.252:* https://10.233.37.228:* https://10.233.8.53:* https://10.233.46.132:* https://10.233.59.44:* https://10.233.41.218:* https://10.233.35.8:* https://10.233.11.215:* https://10.233.40.242:* https://10.233.33.32:* https://10.233.4.102:* https://10.233.41.150:* https://10.233.26.138:* https://10.233.31.174:* https://10.233.32.67:* https://10.233.26.170:* https://10.233.0.208:* 'unsafe-inline' ; img-src * data:;"
+						},
+						{
+							"key": "vary",
+							"value": "accept-encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n    \"nsp-service-intent:intent\": [\n        {\n            \"@\": {\n                \"nsp-model:schema-nodeid\": \"/nsp-service-intent:intent-base/intent\",\n                \"nsp-model:identifier\": \"/nsp-service-intent:intent-base/intent[service-name='EpipeWithoutSDP'][intent-type='epipe']\"\n            },\n            \"intent-type\": \"epipe\",\n            \"service-name\": \"EpipeWithoutSDP\",\n            \"intent-type-version\": \"1\",\n            \"olc-state\": \"deployed\",\n            \"template-name\": \"epipe\",\n            \"intent-specific-data\": {\n                \"epipe:epipe\": {\n                    \"@\": {\n                        \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes\",\n                        \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']\"\n                    },\n                    \"ne-service-id\": 501,\n                    \"mtu\": 1492,\n                    \"customer-id\": 10,\n                    \"description\": \"Sample Epipe created via API\",\n                    \"admin-state\": \"unlocked\",\n                    \"job-id\": null,\n                    \"site-a\": {\n                        \"@\": {\n                            \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-a\",\n                            \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-a\"\n                        },\n                        \"device-id\": \"10.0.4.1\",\n                        \"site-name\": null,\n                        \"description\": null,\n                        \"mtu\": null,\n                        \"endpoint\": [\n                            {\n                                \"@\": {\n                                    \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-a/endpoint\",\n                                    \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-a/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']\"\n                                },\n                                \"port-id\": \"1/1/c9/1\",\n                                \"inner-vlan-tag\": -1,\n                                \"outer-vlan-tag\": 501,\n                                \"admin-state\": \"unlocked\",\n                                \"description\": null,\n                                \"enable-qos\": false,\n                                \"enable-filter\": false,\n                                \"ingress\": {\n                                    \"@\": {\n                                        \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-a/endpoint/ingress\",\n                                        \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-a/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']/ingress\"\n                                    }\n                                },\n                                \"egress\": {\n                                    \"@\": {\n                                        \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-a/endpoint/egress\",\n                                        \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-a/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']/egress\"\n                                    }\n                                }\n                            }\n                        ]\n                    },\n                    \"site-b\": {\n                        \"@\": {\n                            \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-b\",\n                            \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-b\"\n                        },\n                        \"device-id\": \"10.0.4.2\",\n                        \"site-name\": null,\n                        \"description\": null,\n                        \"mtu\": null,\n                        \"endpoint\": [\n                            {\n                                \"@\": {\n                                    \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-b/endpoint\",\n                                    \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-b/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']\"\n                                },\n                                \"port-id\": \"1/1/c9/1\",\n                                \"inner-vlan-tag\": -1,\n                                \"outer-vlan-tag\": 501,\n                                \"admin-state\": \"unlocked\",\n                                \"description\": null,\n                                \"enable-qos\": false,\n                                \"enable-filter\": false,\n                                \"ingress\": {\n                                    \"@\": {\n                                        \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-b/endpoint/ingress\",\n                                        \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-b/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']/ingress\"\n                                    }\n                                },\n                                \"egress\": {\n                                    \"@\": {\n                                        \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/site-b/endpoint/egress\",\n                                        \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/site-b/endpoint[port-id='1/1/c9/1'][inner-vlan-tag='-1'][outer-vlan-tag='501']/egress\"\n                                    }\n                                }\n                            }\n                        ]\n                    },\n                    \"sdp-details\": {\n                        \"@\": {\n                            \"nsp-model:schema-nodeid\": \"/epipe:epipe/epipes/sdp-details\",\n                            \"nsp-model:identifier\": \"/epipe:epipe/epipes[service-name='EpipeWithoutSDP']/sdp-details\"\n                        }\n                    }\n                }\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Current state of EPIPE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0205369a-b297-41da-8027-91a95baac004",
+						"exec": [
+							"console.log(JSON.parse(responseBody));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "f8f6990e-8aa5-4cc9-87fb-8db0d4745731",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Access_Token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{server}}:8545/restconf/data/nsp-service:services/service-layer/eline={{epipe_name}}/service-extension:eline-svc?fields=slc-state;misaligned",
+					"protocol": "https",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8545",
+					"path": [
+						"restconf",
+						"data",
+						"nsp-service:services",
+						"service-layer",
+						"eline={{epipe_name}}",
+						"service-extension:eline-svc"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "slc-state;misaligned"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "0107bd0b-7552-460f-b7ff-42bb0cd3ae20",
+					"name": "Get Current state of EPIPE",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{server}}:8545/restconf/data/nsp-service:services/service-layer/eline=SampleEpipe/service-extension:eline-svc?fields=slc-state;misaligned",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"port": "8545",
+							"path": [
+								"restconf",
+								"data",
+								"nsp-service:services",
+								"service-layer",
+								"eline=SampleEpipe",
+								"service-extension:eline-svc"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "slc-state;misaligned"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 15 Nov 2022 18:48:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "vary",
+							"value": "accept-encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n    \"service-extension:eline-svc\": {\n        \"@\": {\n            \"nsp-model:schema-nodeid\": \"/nsp-service:services/service-layer/eline/service-extension:eline-svc\",\n            \"nsp-model:identifier\": \"/nsp-service:services/service-layer/eline[service-id='SampleEpipe']/service-extension:eline-svc\",\n            \"nsp-model:sources\": []\n        },\n        \"slc-state\": \"deployed\",\n        \"misaligned\": false\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d1b96283-3cdf-4267-9ea6-a5146d22e495",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "85ba19cb-4f58-4cc9-907a-a01ebd65f416",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
