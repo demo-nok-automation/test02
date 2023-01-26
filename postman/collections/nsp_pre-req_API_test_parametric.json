@@ -300,6 +300,119 @@
 					"body": "{\n    \"service-extension:eline-svc\": {\n        \"@\": {\n            \"nsp-model:schema-nodeid\": \"/nsp-service:services/service-layer/eline/service-extension:eline-svc\",\n            \"nsp-model:identifier\": \"/nsp-service:services/service-layer/eline[service-id='SampleEpipe']/service-extension:eline-svc\",\n            \"nsp-model:sources\": []\n        },\n        \"slc-state\": \"deployed\",\n        \"misaligned\": false\n    }\n}"
 				}
 			]
+		},
+		{
+			"name": "Create EPIPE",
+			"id": "ee79102b-fa04-46c5-a98d-8f4a4c407e90",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{Access_Token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nsp-service-intent:intent\": [\n        {\n            \"intent-type\": \"epipe\",\n            \"service-name\": \"SampleEpipe\",\n            \"intent-type-version\": \"1\",\n            \"olc-state\": \"deployed\",\n            \"template-name\": \"EpipeServiceTemplate\",\n            \"intent-specific-data\": {\n                \"epipe:epipe\": {\n                    \"mtu\": 1492,\n                    \"customer-id\": \"1\",\n                    \"ne-service-id\": 900,\n                    \"description\": \"Sample Epipe created via API\",\n                    \"site-a\": {\n                        \"device-id\": \"{{nodeA}}\",\n                        \"endpoint\": [\n                            {\n                                \"port-id\": \"1/1/10\",\n                                \"inner-vlan-tag\": 1,\n                                \"outer-vlan-tag\": 900,\n                                \"description\": \"Endpoint A\"\n                            },\n                            {\n                                \"port-id\": \"1/1/11\",\n                                \"inner-vlan-tag\": 1,\n                                \"outer-vlan-tag\": 900,\n                                \"description\": \"Endpoint B\"\n                            }\n                        ]\n                    }\n                }\n            }\n        }\n    ]\n}"
+				},
+				"url": "https://{{server}}:8545/restconf/data/nsp-service-intent:intent-base"
+			},
+			"response": [
+				{
+					"id": "221ee328-ac5a-4ae5-8c62-20543990f6fd",
+					"name": "Create EPIPE",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nsp-service-intent:intent\": [\n        {\n            \"intent-type\": \"epipe\",\n            \"service-name\": \"SampleEpipe\",\n            \"intent-type-version\": \"1\",\n            \"olc-state\": \"deployed\",\n            \"template-name\": \"EpipeServiceTemplate\",\n            \"intent-specific-data\": {\n                \"epipe:epipe\": {\n                    \"mtu\": 1492,\n                    \"customer-id\": \"1\",\n                    \"ne-service-id\": 900,\n                    \"description\": \"Sample Epipe created via API\",\n                    \"site-a\": {\n                        \"device-id\": \"{{nodeA}}\",\n                        \"endpoint\": [\n                            {\n                                \"port-id\": \"1/1/10\",\n                                \"inner-vlan-tag\": 1,\n                                \"outer-vlan-tag\": 900,\n                                \"description\": \"Endpoint A\"\n                            },\n                            {\n                                \"port-id\": \"1/1/11\",\n                                \"inner-vlan-tag\": 1,\n                                \"outer-vlan-tag\": 900,\n                                \"description\": \"Endpoint B\"\n                            }\n                        ]\n                    }\n                }\n            }\n        }\n    ]\n}"
+						},
+						"url": "https://{{server}}:8545/restconf/data/nsp-service-intent:intent-base"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 15 Nov 2022 18:47:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "vary",
+							"value": "accept-encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n    \"response\": {\n        \"status\": 0,\n        \"startRow\": 0,\n        \"endRow\": 0,\n        \"totalRows\": 1,\n        \"data\": \"Successfully created service in saved state and submitted to Job Manager for further processing with Job Name: epipe_SampleEpipe-1668538076587\",\n        \"errors\": null\n    }\n}"
+				}
+			]
 		}
 	],
 	"event": [
