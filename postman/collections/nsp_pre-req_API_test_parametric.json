@@ -40,7 +40,7 @@
 							"pm.sendRequest(echoPostRequest, function (err, res) {    ",
 							"    pm.environment.set(\"Access_Token\", res.json().access_token);",
 							"    pm.environment.set(\"Refresh_Token\", res.json().refresh_token);",
-							"    console.log(err ? error : res.json())",
+							"    //console.log(err ? error : res.json())",
 							"    });"
 						],
 						"type": "text/javascript"
