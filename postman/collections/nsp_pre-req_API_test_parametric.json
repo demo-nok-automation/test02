@@ -17,6 +17,34 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c854bc6-526a-47fe-bea6-722dc36e709b",
+						"exec": [
+							"const auth = pm.environment.get(\"token_url\");",
+							"const user = btoa(`${pm.environment.get('username')}:${pm.environment.get('password')}`);",
+							"const echoPostRequest = {",
+							"    url: auth,",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Content-Type': 'application/json',",
+							"        'Authorization': 'Basic ' + user",
+							"    },",
+							"    body: { ",
+							"          mode: 'raw',",
+							"          raw: JSON.stringify({\"grant_type\": \"client_credentials\"})   ",
+							"    }",
+							"};",
+							"pm.sendRequest(echoPostRequest, function (err, res) {    ",
+							"    pm.environment.set(\"Access_Token\", res.json().access_token);",
+							"    pm.environment.set(\"Refresh_Token\", res.json().refresh_token);",
+							"    console.log(err ? error : res.json())",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"id": "1b0f5a04-d3c6-438d-a41a-aa17740b4f0f",
