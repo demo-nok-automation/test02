@@ -190,7 +190,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://{{server}}:8545/restconf/data/nsp-service:services/service-layer/eline={{epipe_name}}/service-extension:eline-svc?fields=slc-state;misaligned",
+					"raw": "https://{{server}}:8545/restconf/data/nsp-service:services/service-layer/eline={{a_intent}}/service-extension:eline-svc?fields=slc-state;misaligned",
 					"protocol": "https",
 					"host": [
 						"{{server}}"
@@ -201,7 +201,7 @@
 						"data",
 						"nsp-service:services",
 						"service-layer",
-						"eline={{epipe_name}}",
+						"eline={{a_intent}}",
 						"service-extension:eline-svc"
 					],
 					"query": [
