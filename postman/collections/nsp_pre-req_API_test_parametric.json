@@ -6,90 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "GET the data store",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "8a0ccbb2-bf37-4a2d-891b-672fbfabb1bc",
-						"exec": [
-							"const auth = pm.environment.get(\"token_url\");",
-							"const user = btoa(`${pm.environment.get('username')}:${pm.environment.get('password')}`);",
-							"const echoPostRequest = {",
-							"    url: auth,",
-							"    method: 'POST',",
-							"    header: {",
-							"        'Content-Type': 'application/json',",
-							"        'Authorization': 'Basic ' + user",
-							"    },",
-							"    body: { ",
-							"          mode: 'raw',",
-							"          raw: JSON.stringify({\"grant_type\": \"client_credentials\"})   ",
-							"    }",
-							"};",
-							"pm.sendRequest(echoPostRequest, function (err, res) {    ",
-							"    pm.environment.set(\"Access_Token\", res.json().access_token);",
-							"    pm.environment.set(\"Refresh_Token\", res.json().refresh_token);",
-							"    console.log(err ? error : res.json())",
-							"    });"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "ee043c02-f61b-4a46-a80e-7125854942ae",
-						"exec": [
-							"console.log(JSON.parse(responseBody));",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"_postman_id": "ea3ff123-22ee-41ca-841f-2d3909318d86",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{Access_Token}}"
-					}
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/yang-data+json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://{{server}}:8545/restconf",
-					"protocol": "https",
-					"host": [
-						"{{server}}"
-					],
-					"port": "8545",
-					"path": [
-						"restconf"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null,
-							"type": "text",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GET the schema mounts",
 			"event": [
 				{
@@ -113,7 +29,7 @@
 					}
 				}
 			],
-			"_postman_id": "74f5b589-c316-46e1-96d9-4df631bea54f",
+			"id": "74f5b589-c316-46e1-96d9-4df631bea54f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -170,7 +86,7 @@
 					}
 				}
 			],
-			"_postman_id": "1b0f5a04-d3c6-438d-a41a-aa17740b4f0f",
+			"id": "1b0f5a04-d3c6-438d-a41a-aa17740b4f0f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -299,7 +215,7 @@
 					}
 				}
 			],
-			"_postman_id": "f8f6990e-8aa5-4cc9-87fb-8db0d4745731",
+			"id": "f8f6990e-8aa5-4cc9-87fb-8db0d4745731",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
