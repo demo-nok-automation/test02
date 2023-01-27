@@ -553,7 +553,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"ibn:input\": {\r\n        \"filter\": {\r\n            \"intent-type-list\": [\r\n                {\r\n                    \"intent-type\": \"vprn\",\r\n                    \"intent-type-version\": \"1\"\r\n                }\r\n            ]\r\n        },\r\n        \"page-number\": 0,\r\n        \"page-size\": 100\r\n    }\r\n}",
+					"raw": "{\r\n    \"ibn:input\": {\r\n        \"filter\": {\r\n            \"intent-type-list\": [\r\n                {\r\n                    \"intent-type\": \"epipe\",\r\n                    \"intent-type-version\": \"1\"\r\n                }\r\n            ]\r\n        },\r\n        \"page-number\": 0,\r\n        \"page-size\": 100\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
