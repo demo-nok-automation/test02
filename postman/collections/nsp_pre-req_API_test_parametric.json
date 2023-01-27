@@ -426,7 +426,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer {{token}}"
+						"value": "Bearer {{Access_Token}}"
 					},
 					{
 						"key": "Content-Type",
