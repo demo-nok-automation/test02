@@ -640,6 +640,42 @@
 					"body": "{\n    \"response\": {\n        \"status\": 0,\n        \"startRow\": 0,\n        \"endRow\": 0,\n        \"totalRows\": 1,\n        \"data\": \"Successfully created service in saved state and submitted to Job Manager for further processing with Job Name: epipe_SampleEpipe-1668538076587\",\n        \"errors\": null\n    }\n}"
 				}
 			]
+		},
+		{
+			"name": "https://{{server}}:8545/restconf/data/ibn:ibn/intent=E2E_Sample_VPRN,vprn",
+			"id": "1310ac31-36cb-4ce3-aa7d-80781056d2d6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{Access_Token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/yang-data+json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/yang-data+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{server}}:8545/restconf/data/ibn:ibn/intent=E2E_Sample_VPRN,vprn"
+			},
+			"response": []
 		}
 	],
 	"event": [
